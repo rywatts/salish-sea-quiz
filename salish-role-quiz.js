@@ -186,39 +186,45 @@ const questions = [
 // --- Species data (update image paths to your setup) ---
 const speciesData = {
   orca: {
-    title: "Orca – The Strategist",
+    title: "Strategist",
     function: "coordination",
     image: "images/orca.png",
+    funFact: "Orcas travel and hunt in pods, coordinating closely with one another—much like people who help groups plan and move together.",
     action: "Help coordinate people, events, or shared direction."
   },
   herring: {
-    title: "Herring – The Mobilizer",
+    title: "Mobilizer",
     function: "mobilization",
     image: "images/herring.png",
+    funFact: "Herring move in shimmering schools that can shift direction in an instant—like people who can quickly bring others together into motion.",
     action: "Bring people into action and participation."
   },
   eelgrass: {
-    title: "Eelgrass – The Stabilizer",
+    title: "Stabilizer",
     function: "stabilization",
     image: "images/eelgrass.png",
+    funFact: "Eelgrass beds anchor shorelines and provide habitat, creating stability beneath the surface—like people who hold logistics and systems.",
     action: "Support logistics, setup, and making things run."
   },
   otter: {
-    title: "Otter – The Careholder",
+    title: "Careholder",
     function: "care",
     image: "images/otter.png",
+    funFact: "Sea otters care for each other and their young, often floating together in ‘rafts’—like people who hold care and connection in groups.",
     action: "Support people, relationships, and group wellbeing."
   },
   salmon: {
-    title: "Salmon – The Bridge",
+    title: "Bridge",
     function: "communication",
     image: "images/salmon.png",
+    funFact: "Salmon travel between river and ocean, connecting different parts of the ecosystem—like people who bridge communities and stories.",
     action: "Share stories, design, and messaging that connects people."
   },
   eagle: {
-    title: "Eagle – The Visionary",
+    title: "Visionary",
     function: "vision",
     image: "images/eagle.png",
+    funFact: "Eagles see a wide view from above while still tracking details on the ground—like people who hold big-picture vision in movements.",
     action: "Help shape ideas, direction, and systems-level thinking."
   }
 };
