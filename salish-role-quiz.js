@@ -333,22 +333,62 @@ function showResult() {
     })
     .join("");
 
-  app.innerHTML = `
-    <div class="salish-role-card salish-role-result">
-      <img src="${result.image}" alt="${result.title}" class="salish-role-image" />
+app.innerHTML = `
+  <div class="salish-role-card salish-role-result">
+    <img src="${result.image}" alt="${result.title}" class="salish-role-image" />
 
-      <h4 class="salish-role-title">
-        Looks like you might be quite the ${result.title}.
-      </h4>
+    <h4 class="salish-role-title">
+      Looks like you might be quite the ${result.title}.
+    </h4>
 
-      <p>
-        In this quiz, your strongest organizing style right now is
-        <strong>${functionLabels[topFunction].name}</strong>,
-        which in the Salish Sea we’ve linked to
-        <strong>${result.title}</strong>.
-      </p>
+    <p class="salish-role-insight">
+      Here’s some of what ${functionLabels[topFunction].name.toLowerCase()} often looks like:
+    </p>
 
-      <p class="salish-role-insight">${insightMap[depth]}</p>
+    <ul class="salish-role-style-points">
+      ${
+        topFunction === "mobilization"
+          ? `
+        <li>Inviting people in and helping them feel like this work is for them.</li>
+        <li>Creating energy around events, campaigns, or projects.</li>
+        <li>Helping people move from caring about something to acting together.</li>
+        `
+          : topFunction === "coordination"
+          ? `
+        <li>Helping groups decide who does what and when.</li>
+        <li>Keeping an eye on how pieces fit together.</li>
+        <li>Turning big ideas into shared plans.</li>
+        `
+          : topFunction === "stabilization"
+          ? `
+        <li>Noticing what needs to be set up, fixed, or maintained.</li>
+        <li>Creating reliable systems so others can plug in.</li>
+        <li>Making sure practical details don’t fall through the cracks.</li>
+        `
+          : topFunction === "care"
+          ? `
+        <li>Checking in on how people are really doing.</li>
+        <li>Helping groups talk about feelings, conflict, and care.</li>
+        <li>Making spaces feel more welcoming and grounded.</li>
+        `
+          : topFunction === "communication"
+          ? `
+        <li>Translating ideas so different people can understand them.</li>
+        <li>Sharing stories, visuals, or messages that connect people.</li>
+        <li>Helping groups stay connected across places and identities.</li>
+        `
+          : `
+        <li>Noticing patterns and connections others might miss.</li>
+        <li>Asking what your actions add up to over time.</li>
+        <li>Imagining different ways communities could live and relate.</li>
+        `
+      }
+    </ul>
+
+    <div class="salish-fun-fact">
+      <strong>Why this species?</strong>
+      <p>${result.funFact}</p>
+    </div>
 
       <p class="salish-role-action">
         <strong>Start here:</strong> ${result.action}
