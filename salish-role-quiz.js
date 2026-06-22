@@ -516,8 +516,8 @@ app.innerHTML = `
       }
     </ul>
 
-    <div class="salish-fun-fact">
-      <strong>Why this species?</strong>
+        <div class="salish-fun-fact">
+      <h6 class="salish-fun-fact-title">Ecological Inspiration</h6>
       <p>${result.funFact}</p>
     </div>
 
