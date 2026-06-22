@@ -113,10 +113,20 @@ body {
 
 .salish-fun-fact {
   margin: 0.6rem 0 0.9rem;
-  padding: 0.6rem 0.8rem;
+  padding: 0.7rem 0.85rem;
   border-radius: 10px;
   background: #d6eaf0;
   border: 1px solid #18b3b5;
+}
+
+.salish-fun-fact-title {
+  margin: 0 0 0.3rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #18b3b5;
 }
 
 /* Progress */
