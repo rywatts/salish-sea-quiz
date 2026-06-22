@@ -314,7 +314,6 @@ const questions = [
     ]
   }
 ];
-
 // --- Species data (update image paths to your setup) ---
 const speciesData = {
   orca: {
