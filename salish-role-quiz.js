@@ -51,7 +51,7 @@ const functionToSpecies = {
 // --- Questions (playful, balanced set) ---
 const questions = [
   {
-    text: "It’s a Saturday and you’ve got some energy. What sounds most fun?",
+    text: "It is a Saturday and you have some energy. What sounds most fun?",
     options: [
       {
         label: "Planning a small gathering or event so people can get together",
@@ -73,10 +73,10 @@ const questions = [
   },
 
   {
-    text: "You and some people you care about want to respond to an issue (at school, at work, in the community). You’re most likely to…",
+    text: "You and some people you care about want to respond to an issue at school, work, or in your community. You are most likely to…",
     options: [
       {
-        label: "Make a simple plan: who decides what, who does what, and how you’ll check in together",
+        label: "Make a simple plan: who decides what, who does what, and how you will check in together",
         weights: { coordination: 3 }
       },
       {
@@ -95,7 +95,7 @@ const questions = [
   },
 
   {
-    text: "In most groups (friends, family, school, work, community), people usually come to you when they need…",
+    text: "In most groups you are part of, people usually come to you when they need…",
     options: [
       {
         label: "Help making a plan, setting priorities, or structuring something",
@@ -120,11 +120,11 @@ const questions = [
     text: "When something big happens in your community or the world, your first instinct is to…",
     options: [
       {
-        label: "Look for the bigger pattern: what does this connect to, and what might it mean long-term?",
+        label: "Look for the bigger pattern: what does this connect to, and what might it mean long term",
         weights: { vision: 3 }
       },
       {
-        label: "Share information, stories, or posts so others know what’s going on",
+        label: "Share information, stories, or posts so others know what is going on",
         weights: { communication: 3 }
       },
       {
@@ -132,52 +132,184 @@ const questions = [
         weights: { mobilization: 2, stabilization: 1 }
       },
       {
-        label: "Check on people around you (friends, family, neighbours) and see how they’re doing",
+        label: "Check on people around you (friends, family, neighbours) and see how they are doing",
         weights: { care: 3 }
       }
     ]
   },
 
   {
-    text: "You’re in a group chat, meeting, or circle that’s a bit all over the place. You’re most likely to…",
+    text: "You are in a group chat, meeting, or circle that feels a bit all over the place. You are most likely to…",
     options: [
       {
-        label: "Bring everyone back to the purpose: “What are we actually trying to do here?”",
+        label: "Bring everyone back to the purpose: “What are we actually trying to do here”",
         weights: { coordination: 2, vision: 1 }
       },
       {
-        label: "Suggest a clear next step: “Okay, who’s doing what by when?”",
+        label: "Suggest a clear next step: “Okay, who is doing what by when”",
         weights: { coordination: 3 }
       },
       {
-        label: "Notice who hasn’t spoken yet and make space: “I’d like to hear from people we haven’t heard from.”",
+        label: "Notice who has not spoken yet and make space: “I would like to hear from people we have not heard from”",
         weights: { care: 2, communication: 1 }
       },
       {
-        label: "Summarize what’s been said in simple language so people feel on the same page",
+        label: "Summarize what has been said in simple language so people feel on the same page",
         weights: { communication: 3 }
       }
     ]
   },
 
   {
-    text: "When you let your mind wander about the future, which picture feels most like you?",
+    text: "When you let your mind wander about the future, which picture feels most like you",
     options: [
       {
         label: "A community where decisions are shared, things are organized fairly, and people know how to work together",
         weights: { coordination: 2, vision: 1 }
       },
       {
-        label: "A community where there’s always a way to join in, where people feel invited and not alone",
+        label: "A community where there is always a way to join in and people feel invited, not alone",
         weights: { mobilization: 2, care: 1 }
       },
       {
-        label: "A community where the everyday systems (housing, food, transport, care) are steady, accessible, and cared for",
+        label: "A community where everyday systems like housing, food, transport, and care are steady, accessible, and cared for",
         weights: { stabilization: 2, care: 1 }
       },
       {
         label: "A community where people share stories, learn from the land and water, and imagine new ways of living together",
         weights: { vision: 2, communication: 1 }
+      }
+    ]
+  },
+
+  {
+    text: "Someone suggests starting a new project or club. You are most excited to…",
+    options: [
+      {
+        label: "Figure out what it is for and how you will make decisions together",
+        weights: { coordination: 3 }
+      },
+      {
+        label: "Spread the word and invite people who might be interested",
+        weights: { mobilization: 3 }
+      },
+      {
+        label: "Set up what you will actually need (space, materials, schedule, tech)",
+        weights: { stabilization: 3 }
+      },
+      {
+        label: "Think about who might feel left out and how to make it more welcoming",
+        weights: { care: 2, communication: 1 }
+      }
+    ]
+  },
+
+  {
+    text: "You are spending time on the land or near water. What do you naturally find yourself doing",
+    options: [
+      {
+        label: "Noticing patterns in tides, seasons, plants, or animals and what they might be telling you",
+        weights: { vision: 3 }
+      },
+      {
+        label: "Sharing stories or photos about where you are with other people",
+        weights: { communication: 3 }
+      },
+      {
+        label: "Thinking about practical things like safety, access, or who can join you",
+        weights: { stabilization: 2, care: 1 }
+      },
+      {
+        label: "Using the time to check in with yourself or someone else about how you are really doing",
+        weights: { care: 3 }
+      }
+    ]
+  },
+
+  {
+    text: "There is a lot happening at once and people are stressed. You are most likely to…",
+    options: [
+      {
+        label: "Help the group pause and decide what can be dropped or delayed",
+        weights: { coordination: 2, vision: 1 }
+      },
+      {
+        label: "Check who needs a break or support and help make that possible",
+        weights: { care: 3 }
+      },
+      {
+        label: "Create or suggest a simple system so things feel more manageable",
+        weights: { stabilization: 3 }
+      },
+      {
+        label: "Reach out to more people so the work is not sitting on just a few",
+        weights: { mobilization: 3 }
+      }
+    ]
+  },
+
+  {
+    text: "In online spaces, you most often find yourself…",
+    options: [
+      {
+        label: "Starting or organizing group chats, servers, or threads so people can coordinate",
+        weights: { coordination: 3 }
+      },
+      {
+        label: "Sharing events, links, or calls to action to bring people in",
+        weights: { mobilization: 3 }
+      },
+      {
+        label: "Collecting resources in one place so they are easy to find later",
+        weights: { stabilization: 3 }
+      },
+      {
+        label: "Posting or boosting stories and art that help people feel seen",
+        weights: { communication: 2, care: 1 }
+      }
+    ]
+  },
+
+  {
+    text: "When someone in your life is going through something hard, you most often…",
+    options: [
+      {
+        label: "Help them think through options and make a simple plan",
+        weights: { coordination: 2, stabilization: 1 }
+      },
+      {
+        label: "Show up with practical help like rides, food, or small tasks",
+        weights: { stabilization: 2, care: 1 }
+      },
+      {
+        label: "Listen closely and check what kind of support they actually want",
+        weights: { care: 3 }
+      },
+      {
+        label: "Share a story, song, or resource that helps them feel less alone",
+        weights: { communication: 2, vision: 1 }
+      }
+    ]
+  },
+
+  {
+    text: "You have limited time and energy, but you still want to be part of climate or community work. You are most drawn to…",
+    options: [
+      {
+        label: "Joining or starting small planning conversations about what is needed where you live",
+        weights: { coordination: 2, vision: 1 }
+      },
+      {
+        label: "Helping with occasional outreach, invitations, or event support",
+        weights: { mobilization: 2, stabilization: 1 }
+      },
+      {
+        label: "Supporting behind the scenes with tasks you can do at your own pace",
+        weights: { stabilization: 2, care: 1 }
+      },
+      {
+        label: "Showing up to listening circles, story spaces, or mutual aid check ins when you can",
+        weights: { care: 2, communication: 1 }
       }
     ]
   }
@@ -189,43 +321,43 @@ const speciesData = {
     title: "Strategist",
     function: "coordination",
     image: "images/orca.png",
-    funFact: "Orcas travel and hunt in pods, coordinating closely with one another—much like people who help groups plan and move together.",
+    funFact: "Some orca family pods stay together for their entire lives and can use dozens of shared calls. They coordinate hunts so precisely that each pod has its own learned strategies, passed between generations.",
     action: "Help coordinate people, events, or shared direction."
   },
   herring: {
     title: "Mobilizer",
     function: "mobilization",
     image: "images/herring.png",
-    funFact: "Herring move in shimmering schools that can shift direction in an instant—like people who can quickly bring others together into motion.",
+    funFact: "Pacific herring form huge schools that can hold millions of fish at once. Each herring watches the movement of its nearest neighbours and can turn in a fraction of a second, which is why the whole school can ripple and change direction together.",
     action: "Bring people into action and participation."
   },
   eelgrass: {
     title: "Stabilizer",
     function: "stabilization",
     image: "images/eelgrass.png",
-    funFact: "Eelgrass beds anchor shorelines and provide habitat, creating stability beneath the surface—like people who hold logistics and systems.",
+    funFact: "Eelgrass grows in dense underwater meadows that slow waves and hold sand in place. A single eelgrass bed can shelter many species of fish and invertebrates and can store large amounts of carbon in its roots and surrounding sediments.",
     action: "Support logistics, setup, and making things run."
   },
   otter: {
     title: "Careholder",
     function: "care",
     image: "images/otter.png",
-    funFact: "Sea otters care for each other and their young, often floating together in ‘rafts’—like people who hold care and connection in groups.",
+    funFact: "Sea otters often rest together in groups and use their paws or strands of kelp so they do not drift apart while they sleep. By eating large numbers of sea urchins, they also keep kelp forests from being overgrazed, which protects many other species.",
     action: "Support people, relationships, and group wellbeing."
   },
   salmon: {
     title: "Bridge",
     function: "communication",
     image: "images/salmon.png",
-    funFact: "Salmon travel between river and ocean, connecting different parts of the ecosystem—like people who bridge communities and stories.",
+    funFact: "Some Pacific salmon travel hundreds or even more than a thousand kilometres between river and ocean over their lives. When they return and their bodies decompose, the nutrients they carry can move many metres inland into forest soils and tree growth.",
     action: "Share stories, design, and messaging that connects people."
   },
   eagle: {
     title: "Visionary",
     function: "vision",
     image: "images/eagle.png",
-    funFact: "Eagles see a wide view from above while still tracking details on the ground—like people who hold big-picture vision in movements.",
-    action: "Help shape ideas, direction, and systems-level thinking."
+    funFact: "Eagles can see several times more sharply than many humans and can spot small animals from high in the air. From that vantage point they can scan wide stretches of land or water while still noticing fine movements below.",
+    action: "Help shape ideas, direction, and systems level thinking."
   }
 };
 
