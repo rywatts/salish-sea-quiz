@@ -466,7 +466,6 @@ function showResult() {
 
 app.innerHTML = `
   <div class="salish-role-card salish-role-result">
-    <img src="${result.image}" alt="${result.title}" class="salish-role-image" />
 
     <h4 class="salish-role-title">
       Looks like you might be quite the ${result.title}.
