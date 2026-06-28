@@ -532,7 +532,7 @@ app.innerHTML = `
           and those roles can shift over time and across different groups.
         </p>
         <p>
-          Here’s your mix from this quiz, shown as an Enneagram-style pie of your current tendencies:
+          Here’s your mix from this quiz:
         </p>
 
         <div class="salish-role-pie-wrapper">
@@ -542,40 +542,6 @@ app.innerHTML = `
         <ul>
           ${pieListHtml}
         </ul>
-
-        <p>
-          You’re invited to explore any of the role toolkits that scored higher for you,
-          not just your top one.
-        </p>
-      </div>
-
-      <div class="salish-role-resources">
-        <h5>Resources by organizing style</h5>
-        <p>
-          These links offer starting points for practicing each style in climate and community work.
-        </p>
-        <p>
-          <a href="CARE_RESOURCES_URL_HERE" target="_blank" rel="noopener">
-            Caregiving resources
-          </a> |
-          <a href="STRATEGIZING_RESOURCES_URL_HERE" target="_blank" rel="noopener">
-            Strategizing resources
-          </a> |
-          <a href="MOBILIZING_RESOURCES_URL_HERE" target="_blank" rel="noopener">
-            Mobilizing resources
-          </a>
-        </p>
-        <p>
-          <a href="STABILIZING_RESOURCES_URL_HERE" target="_blank" rel="noopener">
-            Stabilizing resources
-          </a> |
-          <a href="BRIDGING_RESOURCES_URL_HERE" target="_blank" rel="noopener">
-            Bridging & storytelling resources
-          </a> |
-          <a href="VISIONING_RESOURCES_URL_HERE" target="_blank" rel="noopener">
-            Visioning resources
-          </a>
-        </p>
       </div>
 
       <button class="salish-role-retake" onclick="location.reload()">
