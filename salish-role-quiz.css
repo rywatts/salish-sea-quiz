@@ -44,6 +44,43 @@ body {
   margin-top: 1.6rem;
 }
 
+.salish-role-email-step p {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 0.7rem;
+}
+
+.salish-role-email-label {
+  display: block;
+  margin: 0.8rem 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.salish-role-email-input {
+  display: block;
+  margin-top: 0.3rem;
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 2px solid #dce8d0;
+  background: #f3efe3;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  color: #123041;
+}
+
+.salish-role-checkbox-group {
+  margin: 0.6rem 0;
+}
+
+.salish-role-checkbox-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
 /* Card */
 
 .salish-role-card {
