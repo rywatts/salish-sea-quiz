@@ -1,4 +1,5 @@
 // --- Score tracker ---
+// --- Score tracker ---
 let functions = {
   coordination: 0,
   mobilization: 0,
@@ -7,8 +8,17 @@ let functions = {
   communication: 0,
   vision: 0
 };
-
 let questionsAnswered = 0;
+
+// --- External integration config (Zapier / Salesforce) ---
+const integrationConfig = {
+  // Digital services: replace this with the Zapier Webhook URL when ready
+  zapierWebhookUrl: 'https://hooks.zapier.com/hooks/catch/XXXXXXXX/XXXXXXXX',
+  enabled: true
+};
+
+// Store computed quiz result so we can email/log it
+let quizResultData = null;
 
 // --- Human-friendly labels for each organizing style ---
 const functionLabels = {
@@ -405,8 +415,127 @@ function answer(optionIndex, questionIndex) {
   }
 }
 
+// --- Finish quiz and decide next screen ---
+function finishQuizAndMaybeEmail() {
+  // This mirrors the start of showResult to prepare data once
+  const topFunction = Object.keys(functions).reduce((a, b) =>
+    functions[a] > functions[b] ? a : b
+  );
+
+  const speciesKey = Object.keys(speciesData).find(
+    key => speciesData[key].function === topFunction
+  );
+  const result = speciesData[speciesKey];
+
+  quizResultData = {
+    topFunction,
+    speciesKey,
+    title: result.title,
+    funFact: result.funFact,
+    scores: { ...functions }
+  };
+
+  // If email step is disabled, keep current behaviour: go straight to results
+  if (!integrationConfig.enabled) {
+    showResult();
+    return;
+  }
+
+  // Otherwise, show the email + subscription screen first
+  renderEmailSubscriptionScreen();
+}
+
+// --- Email + subscription screen ---
+function renderEmailSubscriptionScreen() {
+  const app = document.getElementById('salish-role-app');
+  if (!app) return;
+
+  app.innerHTML = `
+    <div class="salish-role-card salish-role-email-step">
+      <div class="salish-role-question">
+        Before you see your Salish Sea role results:
+      </div>
+
+      <p>
+        You can choose to share your email so we can send your results and keep you in the loop.
+        This is optional, and you’ll still see your results even if you leave this blank.
+      </p>
+
+      <label class="salish-role-email-label">
+        Email address
+        <input type="email" id="salish-email" class="salish-role-email-input" placeholder="you@example.com" />
+      </label>
+
+      <div class="salish-role-checkbox-group">
+        <label>
+          <input type="checkbox" id="salish-email-results" />
+          Email my quiz results to me
+        </label>
+      </div>
+
+      <p>Stay informed about our work:</p>
+      <div class="salish-role-checkbox-group">
+        <label>
+          <input type="checkbox" id="salish-subscribe-gsa" />
+          Subscribe to the general GSA mailing list
+        </label>
+        <label>
+          <input type="checkbox" id="salish-subscribe-climate" />
+          Subscribe to the climate-ready campaign mailing list
+        </label>
+      </div>
+
+      <button id="salish-email-submit" class="salish-role-retake">
+        Continue to my results
+      </button>
+
+      <p class="salish-role-progress">
+        We’ll respect your inbox, and you can opt out of emails at any time using the links we provide.
+      </p>
+    </div>
+  `;
+
+  const submitBtn = document.getElementById('salish-email-submit');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', handleEmailSubscriptionSubmit);
+  }
+}
+
+function handleEmailSubscriptionSubmit() {
+  const email = (document.getElementById('salish-email')?.value || '').trim();
+  const emailResults = document.getElementById('salish-email-results')?.checked || false;
+  const subscribeGsa = document.getElementById('salish-subscribe-gsa')?.checked || false;
+  const subscribeClimate = document.getElementById('salish-subscribe-climate')?.checked || false;
+
+  const payload = {
+    email,
+    email_results: emailResults,
+    subscribe_gsa: subscribeGsa,
+    subscribe_climate_ready: subscribeClimate,
+    quiz_result: quizResultData,
+    source: 'salish_sea_role_quiz',
+    timestamp: new Date().toISOString()
+  };
+
+  // Only send data if an email is provided and integration is enabled
+  if (integrationConfig.enabled && integrationConfig.zapierWebhookUrl && email) {
+    try {
+      fetch(integrationConfig.zapierWebhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (error) {
+      console.error('Zapier webhook error', error);
+    }
+  }
+
+  // Now show the existing result view
+  showResult();
+}
+
 // --- Show result with pie chart ---
-function showResult() {
+function finishQuizAndMaybeEmail() {
   const topFunction = Object.keys(functions).reduce((a, b) =>
     functions[a] > functions[b] ? a : b
   );
