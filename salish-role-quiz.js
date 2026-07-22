@@ -12,8 +12,7 @@ let questionsAnswered = 0;
 
 // --- External integration config (Zapier / Salesforce) ---
 const integrationConfig = {
-  // Digital services: replace this with the Zapier Webhook URL when ready
-  zapierWebhookUrl: 'https://hooks.zapier.com/hooks/catch/XXXXXXXX/XXXXXXXX',
+  zapierWebhookUrl: 'https://hooks.zapier.com/hooks/catch/2136453/4uzd8ju/',
   enabled: true
 };
 
@@ -501,36 +500,52 @@ function renderEmailSubscriptionScreen() {
   }
 }
 
-function handleEmailSubscriptionSubmit() {
+async function handleEmailSubscriptionSubmit() {
   const email = (document.getElementById('salish-email')?.value || '').trim();
   const emailResults = document.getElementById('salish-email-results')?.checked || false;
   const subscribeGsa = document.getElementById('salish-subscribe-gsa')?.checked || false;
   const subscribeClimate = document.getElementById('salish-subscribe-climate')?.checked || false;
 
-  const payload = {
-    email,
-    email_results: emailResults,
-    subscribe_gsa: subscribeGsa,
-    subscribe_climate_ready: subscribeClimate,
-    quiz_result: quizResultData,
-    source: 'salish_sea_role_quiz',
-    timestamp: new Date().toISOString()
-  };
+ const payload = {
+  email: email,
+  email_results: emailResults,
+  subscribe_gsa: subscribeGsa,
+  subscribe_climate_ready: subscribeClimate,
+  result: quizResultData.title,
+  species: quizResultData.speciesKey,
+  source: "salish_sea_role_quiz",
+  timestamp: new Date().toISOString()
+};
 
-  // Only send data if an email is provided and integration is enabled
-  if (integrationConfig.enabled && integrationConfig.zapierWebhookUrl && email) {
+  // Send to Zapier if an email was entered
+  if (
+    integrationConfig.enabled &&
+    integrationConfig.zapierWebhookUrl &&
+    email
+  ) {
     try {
-      fetch(integrationConfig.zapierWebhookUrl, {
+      console.log("Sending payload to Zapier:", payload);
+
+      const response = await fetch(integrationConfig.zapierWebhookUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(payload)
       });
+
+      console.log("Zapier response status:", response.status);
+
+      if (!response.ok) {
+        throw new Error(`Webhook failed (${response.status})`);
+      }
+
+      console.log("Webhook sent successfully.");
     } catch (error) {
-      console.error('Zapier webhook error', error);
+      console.error("Zapier webhook error:", error);
     }
   }
 
-  // Now show the existing result view
   showResult();
 }
 
