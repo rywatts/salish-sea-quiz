@@ -1,4 +1,4 @@
-// --- Score tracker ---
+// Pages rebuild test
 // --- Score tracker ---
 let functions = {
   coordination: 0,
