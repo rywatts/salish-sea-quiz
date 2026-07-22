@@ -407,41 +407,11 @@ function answer(optionIndex, questionIndex) {
 
   questionsAnswered++;
 
-  if (questionsAnswered === questions.length) {
-    showResult();
-  } else {
-    renderQuestion(questionIndex + 1);
-  }
+ if (questionsAnswered === questions.length) {
+  finishQuizAndMaybeEmail();
+} else {
+  renderQuestion(questionIndex + 1);
 }
-
-// --- Finish quiz and decide next screen ---
-function finishQuizAndMaybeEmail() {
-  // This mirrors the start of showResult to prepare data once
-  const topFunction = Object.keys(functions).reduce((a, b) =>
-    functions[a] > functions[b] ? a : b
-  );
-
-  const speciesKey = Object.keys(speciesData).find(
-    key => speciesData[key].function === topFunction
-  );
-  const result = speciesData[speciesKey];
-
-  quizResultData = {
-    topFunction,
-    speciesKey,
-    title: result.title,
-    funFact: result.funFact,
-    scores: { ...functions }
-  };
-
-  // If email step is disabled, keep current behaviour: go straight to results
-  if (!integrationConfig.enabled) {
-    showResult();
-    return;
-  }
-
-  // Otherwise, show the email + subscription screen first
-  renderEmailSubscriptionScreen();
 }
 
 // --- Email + subscription screen ---
@@ -551,6 +521,40 @@ async function handleEmailSubscriptionSubmit() {
 
 // --- Show result with pie chart ---
 function finishQuizAndMaybeEmail() {
+  const topFunction = Object.keys(functions).reduce((a, b) =>
+    functions[a] > functions[b] ? a : b
+  );
+
+  const ranking = Object.entries(functions).sort((a, b) => b[1] - a[1]);
+
+  const speciesKey = Object.keys(speciesData).find(
+    key => speciesData[key].function === topFunction
+  );
+
+  const result = speciesData[speciesKey];
+
+  // Save the quiz result so both Zapier and the results page can use it
+  quizResultData = {
+    topFunction,
+    speciesKey,
+    title: result.title,
+    action: result.action,
+    funFact: result.funFact,
+    scores: { ...functions },
+    ranking
+  };
+
+  // Skip the email screen if integrations are disabled
+  if (!integrationConfig.enabled) {
+    showResult();
+    return;
+  }
+
+  // Otherwise, collect the email first
+  renderEmailSubscriptionScreen();
+}
+
+function showResult() {
   const topFunction = Object.keys(functions).reduce((a, b) =>
     functions[a] > functions[b] ? a : b
   );
