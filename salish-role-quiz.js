@@ -484,39 +484,48 @@ async function handleEmailSubscriptionSubmit() {
   result: quizResultData.title,
   species: quizResultData.speciesKey,
   source: "salish_sea_role_quiz",
-  timestamp: new Date().toISOString()
+  timestamp: new Date().toISOString(),
+  scores: quizResultData.scores
 };
 
-  // Send to Zapier if an email was entered
-  if (
-    integrationConfig.enabled &&
-    integrationConfig.zapierWebhookUrl &&
-    email
-  ) {
-    try {
-      console.log("Sending payload to Zapier:", payload);
+// Send to Zapier if an email was entered
+if (
+  integrationConfig.enabled &&
+  integrationConfig.zapierWebhookUrl &&
+  email
+) {
+  try {
+    console.log("Sending payload to Zapier:", payload);
 
-      const response = await fetch(integrationConfig.zapierWebhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
+    // Convert the payload into a form submission
+    const formData = new FormData();
 
-      console.log("Zapier response status:", response.status);
+Object.entries(payload).forEach(([key, value]) => {
+  formData.append(
+    key,
+    typeof value === "object" ? JSON.stringify(value) : value
+  );
+});
 
-      if (!response.ok) {
-        throw new Error(`Webhook failed (${response.status})`);
-      }
 
-      console.log("Webhook sent successfully.");
-    } catch (error) {
-      console.error("Zapier webhook error:", error);
+    const response = await fetch(integrationConfig.zapierWebhookUrl, {
+      method: "POST",
+      body: formData
+    });
+
+    console.log("Zapier response status:", response.status);
+
+    if (!response.ok) {
+      throw new Error(`Webhook failed (${response.status})`);
     }
-  }
 
-  showResult();
+    console.log("Webhook sent successfully.");
+  } catch (error) {
+    console.error("Zapier webhook error:", error);
+  }
+}
+
+showResult();
 }
 
 // --- Show result with pie chart ---
