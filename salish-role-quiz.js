@@ -508,10 +508,16 @@ Object.entries(payload).forEach(([key, value]) => {
 });
 
 
-    const response = await fetch(integrationConfig.zapierWebhookUrl, {
-      method: "POST",
-      body: formData
-    });
+   const response = await fetch(integrationConfig.zapierWebhookUrl, {
+  method: "POST",
+  body: JSON.stringify({
+    email: "test@example.com",
+    result: "Bridge",
+    species: "salmon",
+    source: "salish_sea_role_quiz"
+  })
+});
+
 
     console.log("Zapier response status:", response.status);
 
